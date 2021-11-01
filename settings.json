@@ -1,0 +1,10 @@
+{
+  "web_address": ":9000",
+  "redirections": [
+    {
+      "source": ":2222",
+      "destination": ":22",
+      "network": "tcp"
+    }
+  ]
+}
