@@ -12,8 +12,8 @@ var listCmd = &cobra.Command{
 	RunE: func(cmd *cobra.Command, args []string) error {
 		var settings models.Settings
 		settings.Load()
-		for _, redirection := range settings.Redirections {
-			log.Printf(`Type: %s, From: %s, To: %s`, redirection.Network, redirection.Source, redirection.Destination)
+		for _, portForward := range settings.PortForwards {
+			log.Printf(`Type: %s, From: %s, To: %s`, portForward.Network, portForward.Source, portForward.Destination)
 		}
 		return nil
 	},

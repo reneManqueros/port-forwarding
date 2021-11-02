@@ -24,21 +24,21 @@ var removeCmd = &cobra.Command{
 
 		var settings models.Settings
 		settings.Load()
-		r := models.Redirection{
+		r := models.PortForward{
 			Source:      args[1],
 			Destination: args[2],
 			Network:     network,
 		}
 
-		var newRedirections []models.Redirection
+		var filteredPortForwards []models.PortForward
 
-		for _, value := range settings.Redirections {
+		for _, value := range settings.PortForwards {
 			if value != r {
-				newRedirections = append(newRedirections, value)
+				filteredPortForwards = append(filteredPortForwards, value)
 			}
 		}
 
-		settings.Redirections = newRedirections
+		settings.PortForwards = filteredPortForwards
 		settings.Save()
 		log.Println("port forward removed")
 		return nil

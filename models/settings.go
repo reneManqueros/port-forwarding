@@ -7,8 +7,7 @@ import (
 )
 
 type Settings struct {
-	WebAddress   string        `json:"web_address"`
-	Redirections []Redirection `json:"redirections"`
+	PortForwards []PortForward `json:"port_forwards"`
 }
 
 func (s *Settings) Load() {

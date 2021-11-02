@@ -7,16 +7,15 @@ import (
 
 var forwardCmd = &cobra.Command{
 	Use:   "forward",
-	Short: "Run forward service",
+	Short: "Run port forwarding",
 	Run: func(cmd *cobra.Command, args []string) {
 		var settings models.Settings
 		settings.Load()
 
-		for key, _ := range settings.Redirections {
-			thisRedir := settings.Redirections[key]
-			go func(r *models.Redirection) {
-				r.Listen()
-			}(&thisRedir)
+		for _, portForward := range settings.PortForwards {
+			go func(pf models.PortForward) {
+				pf.Listen()
+			}(portForward)
 		}
 		waitChan := make(chan int)
 		<-waitChan

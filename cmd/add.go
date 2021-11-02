@@ -24,12 +24,12 @@ var addCmd = &cobra.Command{
 
 		var settings models.Settings
 		settings.Load()
-		r := models.Redirection{
+		r := models.PortForward{
 			Source:      args[1],
 			Destination: args[2],
 			Network:     network,
 		}
-		settings.Redirections = append(settings.Redirections, r)
+		settings.PortForwards = append(settings.PortForwards, r)
 		settings.Save()
 		log.Println("port forward added")
 		return nil

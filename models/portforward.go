@@ -6,14 +6,14 @@ import (
 	"net"
 )
 
-type Redirection struct {
+type PortForward struct {
 	Source      string `json:"source"`
 	Destination string `json:"destination"`
 	Network     string `json:"network"`
 }
 
-func (r *Redirection) Listen() {
-	ln, err := net.Listen(r.Network, r.Source)
+func (pf *PortForward) Listen() {
+	ln, err := net.Listen(pf.Network, pf.Source)
 	if err != nil {
 		log.Fatalln(err)
 	}
@@ -24,7 +24,7 @@ func (r *Redirection) Listen() {
 			panic(err)
 		}
 
-		go handleRequest(r.Network, sourceConnection, r.Destination)
+		go handleRequest(pf.Network, sourceConnection, pf.Destination)
 	}
 }
 

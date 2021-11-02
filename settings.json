@@ -1,1 +1,1 @@
-{"web_address":":9000","redirections":[{"source":":8002","destination":":22","network":"tcp"},{"source":"from","destination":"to","network":"tcp"}]}
+{"port_forwards":[{"source":":8002","destination":":22","network":"tcp"}]}
