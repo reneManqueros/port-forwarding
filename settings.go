@@ -11,14 +11,6 @@ type Settings struct {
 	Redirections []Redirection `json:"redirections"`
 }
 
-func (s *Settings) AddRedirection(redirection Redirection) {
-	// ToDo: make threadsafe
-	s.Redirections = append(s.Redirections, redirection)
-
-	// ToDo: Add marker for threadsafe killswitch
-	s.Save()
-}
-
 func (s *Settings) Load() {
 	data, err := ioutil.ReadFile("settings.json")
 	if err != nil {

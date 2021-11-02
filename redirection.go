@@ -6,6 +6,12 @@ import (
 	"net"
 )
 
+type Redirection struct {
+	Source      string `json:"source"`
+	Destination string `json:"destination"`
+	Network     string `json:"network"`
+}
+
 func (r *Redirection) Listen() {
 	ln, err := net.Listen(r.Network, r.Source)
 	if err != nil {
@@ -13,7 +19,6 @@ func (r *Redirection) Listen() {
 	}
 
 	for {
-		// ToDo: add killswitch here
 		sourceConnection, err := ln.Accept()
 		if err != nil {
 			panic(err)
@@ -21,12 +26,6 @@ func (r *Redirection) Listen() {
 
 		go handleRequest(r.Network, sourceConnection, r.Destination)
 	}
-}
-
-type Redirection struct {
-	Source      string `json:"source"`
-	Destination string `json:"destination"`
-	Network     string `json:"network"`
 }
 
 func handleRequest(network string, sourceConnection net.Conn, destinationAddress string) {
